@@ -1,0 +1,83 @@
+{
+    "doctors": [
+        {
+            "name": "Dr. Malhotra",
+            "id": "101",
+            "specialization": "psychiatrist",
+            "availability": "8Am to 11Am"
+        },
+        {
+            "name": "Dr. Deshpande",
+            "id": "102",
+            "specialization": "Anesthesiologist",
+            "availability": "12PM to 3PM"
+        },
+        {
+            "name": "Dr. Kapoor",
+            "id": "103",
+            "specialization": "Cardiologist",
+            "availability": "4PM to 7PM"
+        }
+    ],
+    "patients": [
+        {
+            "name": "Mr. Ram",
+            "id": "1001",
+            "mob": "7135759570",
+            "age": "55"
+        },
+        {
+            "name": "Mr. Sham",
+            "id": "1002",
+            "mob": "9489259567",
+            "age": "58"
+        },
+        {
+            "name": "Mr. Suresh",
+            "id": "1003",
+            "mob": "9423895254",
+            "age": "62"
+        },
+        {
+            "name": "abc",
+            "id": "1005",
+            "mob": "5667788990",
+            "age": "78"
+        },
+        {
+            "name": "pqr",
+            "id": "1006",
+            "mob": "2334455667",
+            "age": "34",
+            "dr": "Dr. Malhotra"
+        },
+        {
+            "name": "xyz",
+            "id": "1007",
+            "mob": "4565432378",
+            "age": "45",
+            "dr": "Dr. Deshpande"
+        },
+        {
+            "name": "pra",
+            "id": "1008",
+            "mob": "7274127314",
+            "age": "45",
+            "dr": "Dr. Malhotra"
+        },
+        {
+            "name": "pqr",
+            "id": "1009",
+            "mob": "1223344556",
+            "age": "34",
+            "dr": "Dr. Malhotra"
+        },
+        {
+            "name": "abc",
+            "id": "1010",
+            "mob": "4556667788",
+            "age": "45",
+            "dr": "Dr. Deshpande"
+        }
+    ]
+}

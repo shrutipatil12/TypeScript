@@ -1,0 +1,61 @@
+{
+    "purchased": [
+        {
+            "pname": "wheat",
+            "weight": 5,
+            "price": 400,
+            "totalprice": 400
+        },
+        {
+            "purchased": [
+                {
+                    "pname": "rice",
+                    "weight": 3,
+                    "price": 360,
+                    "totalprice": 360
+                },
+                {
+                    "purchased": [
+                        {
+                            "pname": "sugar",
+                            "weight": 2,
+                            "price": 200,
+                            "totalprice": 200
+                        },
+                        {
+                            "purchased": [
+                                {
+                                    "pname": "wheat",
+                                    "weight": 2,
+                                    "price": 160,
+                                    "totalprice": 160
+                                },
+                                {
+                                    "purchased": [
+                                        {
+                                            "pname": "sugar",
+                                            "weight": 2,
+                                            "price": 200,
+                                            "totalprice": 200
+                                        },
+                                        {
+                                            "purchased": [
+                                                {
+                                                    "pname": "sugar",
+                                                    "weight": 3,
+                                                    "price": 300,
+                                                    "totalprice": 300
+                                                },
+                                                {}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

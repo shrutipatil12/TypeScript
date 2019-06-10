@@ -1,0 +1,19 @@
+{
+    "Stock": [
+        {
+            "nameOfStock": "Peter",
+            "noOfShares": "20",
+            "priceOfshares": "100"
+        },
+        {
+            "nameOfStock": "Joe",
+            "noOfShares": "200",
+            "priceOfshares": "1000"
+        },
+        {
+            "nameOfStock": "Jack",
+            "noOfShares": "300",
+            "priceOfshares": "2000"
+        }
+    ]
+}
