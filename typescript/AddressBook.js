@@ -13,95 +13,87 @@ exports.__esModule = true;
 /***************************************************************************************************
  * Execution :  cmd >tsc AddressBook.ts
  * purpose   : User Interface for a Simple Address Book
- *
- *
- * @description
  * @file     :  AddressBook.ts
  * @overview :  The software to be designed is a program that can be used to maintain an address book. An address book
                 holds a collection of entries, each recording a person's first and last names, address, city, state, zip, and
                 phone number.
- *
  * @module   :  AddressBook.ts >This is a optional if expicitly its an npm or local package
  * @author   :  Shruti
  * @version  :  npm 6.9.0
- * @since    :  5/6/2019
- *
+ * @since    :  9/6/2019
  **********************************************************************************************************/
-var readline = require('readline-sync');
-var fs = require('fs');
-var Address = /** @class */ (function () {
-    function Address(firstname, lastname, idno, address) {
+var read = require("readline-sync");
+// Reg exp for validation of user inputs 
+//var nameRestriction = /[a-z]/ig
+var filestream = require('fs');
+/**
+ * @class: Address1
+ * @description: define the class name as addressss and properties for details of person
+ */
+var Address1 = /** @class */ (function () {
+    function Address1(firstname, lastname, idno, state, city, zip, phno) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.idno = idno;
-        this.address = address;
-    }
-    return Address;
-}());
-var Address2 = /** @class */ (function () {
-    function Address2(state, city, zip, phno) {
         this.state = state;
         this.city = city;
         this.zip = zip;
-        this.pincode = phno;
+        this.phno = phno;
     }
-    return Address2;
+    return Address1;
 }());
-var AddressBook = /** @class */ (function (_super) {
-    __extends(AddressBook, _super);
-    function AddressBook() {
+var obj = {
+    adressArr: []
+};
+var Address = /** @class */ (function (_super) {
+    __extends(Address, _super);
+    function Address() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    AddressBook.prototype.addperson = function () {
+    /**
+     * @function: addPerson
+     * @description: addperson methos is used to add new person to the address book
+     */
+    Address.prototype.addPerson = function () {
         try {
-            var firstname = readline.question('enter the first name');
-            var lastname = readline.question('enter the last name');
-            var idno = readline.question('enter the id no');
+            var obj_1 = {
+                adressArr: []
+            };
+            var firstname = read.question('enter the first name:');
+            var lastname = read.question('enter the last name:');
+            var idno = read.question('enter the idno:');
             console.log();
-            console.log("residence details");
-            var state = readline.question('enter the state');
-            var city = readline.question('enter the city name');
-            var zip = readline.question('enter the zip code');
-            var phno = readline.question('enter the phone number');
-            var address3 = new Address2(state, city, zip, phno);
-            this.adressArr.push(address3);
-            var address4 = new Address(firstname, lastname, idno, this.adressArr);
-            var read = this.readfile();
-            read.push(address4);
-            this.writefile(read);
-        }
-        catch (err) {
-            console.log(err);
-        }
-    };
-    AddressBook.prototype.ask = function (idnoo) {
-        try {
-            var choice = readline.question("enter 1 for changing the address..\n..2 for no");
-            if (choice < 0 || choice > 2)
-                throw " plz enter 1 or 2";
-            if (choice == 1) {
-                console.log("residence details");
-                var state = readline.question('enter the state');
-                var city = readline.question('enter the city name');
-                var zip = readline.question('enter the zip code plz');
-                var phno = readline.question('enter the phone number');
-                var address34 = new address34(state, city, zip, phno);
-                var addressjson = this.readfile();
-                for (var key in addressjson) {
-                    if (addressjson[key].idno == idnoo)
-                        addressjson[key].address = address34;
-                }
-                this.writefile(addressjson);
+            console.log("Enter your residence details");
+            var state = read.question('enter the state:');
+            var city = read.question('enter the city name:');
+            var zip = read.question('enter the zip code plz');
+            var phno = read.question('enter the phone number:');
+            var address = new Address(firstname, lastname, idno, state, city, zip, phno);
+            //  console.log(address)
+            var r = this.readfile();
+            obj_1.adressArr.push(r);
+            obj_1.adressArr.push(address);
+            var data1 = JSON.stringify(obj_1);
+            filestream.writeFileSync('/home/user/TypeScript/typescript/address.json', data1);
+            if (obj_1) {
+                return true;
+            }
+            else {
+                return false;
             }
         }
         catch (err) {
-            console.log(err);
-            this.ask(idnoo);
+            console.log("error in catch block ");
+            //this.addperson()
         }
     };
-    AddressBook.prototype["delete"] = function () {
+    /**
+     * @function: deletee
+     * @description: used to delete the particular person address from address book
+     */
+    Address.prototype.deletee = function () {
         try {
-            var idn = readline.question("enter the id number");
+            var idn = read.question("enter the id number:");
             var addressjson = this.readfile();
             var f = 0;
             for (var key in addressjson) {
@@ -109,11 +101,12 @@ var AddressBook = /** @class */ (function (_super) {
                     var f = 1;
                 var index = addressjson.indexOf(idn);
                 addressjson.splice(index, 1);
-                this.writefile(addressjson);
+                var data1 = JSON.stringify(addressjson);
+                filestream.writeFileSync('/home/user/TypeScript/typescript/address.json', data1);
             }
             if (f == 0) {
                 console.log("your id is not present");
-                this["delete"]();
+                this.deletee();
                 return false;
             }
             else {
@@ -121,90 +114,192 @@ var AddressBook = /** @class */ (function (_super) {
             }
         }
         catch (err) {
-            console.log(err);
-            this["delete"]();
+            console.log(err + " re enter the idno: ");
+            //deletee()
         }
     };
-    AddressBook.prototype.sort = function () {
+    /**
+     * @function: sort
+     * @description:sorting the address book data based on person idno
+     */
+    Address.prototype.sort = function () {
+        var f = 0;
         var addressjson = this.readfile();
         addressjson.sort(function (a, b) {
             return a.idno - b.idno;
         });
-        this.writefile(addressjson);
-        console.log("your file is sorted");
+        var data1 = JSON.stringify(addressjson);
+        filestream.writeFileSync('/home/user/TypeScript/typescript/address.json', data1);
+        return true;
+        //console.log("your file is sorted")
     };
-    AddressBook.prototype.readfile = function () {
-        var data = fs.readFileSync('../TypeScript/address.json');
+    /**
+     * @function:readfile
+     * @description: readfile function is used for read the data from json file
+     */
+    Address.prototype.readfile = function () {
+        var data = filestream.readFileSync('/home/user/TypeScript/typescript/address.json');
         var data1 = JSON.parse(data);
         console.log(data1);
         return data1;
     };
-    AddressBook.prototype.writefile = function (data) {
-        var data1 = JSON.stringify(data);
-        fs.writeFileSync('../TypeScript/address.json', data1);
+    //
+    /***
+     * @function: updateAddress
+     * @description: update method is used to update the address of particular person in the address book
+     */
+    Address.prototype.updateAddress = function (idno) {
+        try {
+            var data = this.readfile();
+            for (var index = 0; index < data.length; index++) {
+                if (idno == data[index].idno) {
+                    var value = read.question("1.change the state name \n 2. change the city name \n 3.change the zip code of city \n4.change the phone number ");
+                    switch (value) {
+                        case 1:
+                            var res = updateState(index);
+                            if (res == true) {
+                                console.log("state updated successfully");
+                            }
+                            else {
+                                console.log("not updated");
+                            }
+                            break;
+                        case 2:
+                            var res = updateCity(index);
+                            if (res == true) {
+                                console.log("state updated successfully");
+                            }
+                            else {
+                                console.log("not updated");
+                            }
+                            break;
+                        case 3:
+                            var res = updateZip(index);
+                            if (res == true) {
+                                console.log("state updated successfully");
+                            }
+                            else {
+                                console.log("not updated");
+                            }
+                            break;
+                        case 4:
+                            var res = updatePhone(index);
+                            if (res == true) {
+                                console.log("state updated successfully");
+                            }
+                            else {
+                                console.log("not updated");
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        catch (err) {
+            console.log(" plz re enter the option");
+        }
+        //updateState function is used to update the state name of particular person 
+        function updateState(index) {
+            if (index) {
+                var newstate = read.question('enter the new state name');
+                data[index].state = newstate;
+                var data1 = JSON.stringify(data);
+                filestream.writeFileSync('/home/user/TypeScript/typescript/address.json', data1);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        //updateCity function is used to update the city of perticular person
+        function updateCity(index) {
+            if (index) {
+                var city = read.question('enter the new city name');
+                data[index].state = city;
+                var data1 = JSON.stringify(data);
+                filestream.writeFileSync('/home/user/TypeScript/typescript/address.json', data1);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        // updateZip function is used to update the zip code of the perticular person
+        function updateZip(index) {
+            if (index) {
+                var Zip = parseInt(read.question('enter the new Zip code'));
+                data[index].state = Zip;
+                var data1 = JSON.stringify(data);
+                filestream.writeFileSync('/home/user/TypeScript/typescript/address.json', data1);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        //update function is used to update the phone number of perticular person
+        function updatePhone(index) {
+            if (index) {
+                var Phone = parseInt(read.question('enter the new phone number'));
+                data[index].state = Phone;
+                var data1 = JSON.stringify(data);
+                filestream.writeFileSync('/home/user/TypeScript/typescript/address.json', data1);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     };
-    return AddressBook;
-}(Address2));
+    return Address;
+}(Address1));
+exports.Address = Address;
+var add = new Address("shruti", "patil", 2, "maharashtra", "mumbai", 1234, 1234567897);
+var choice;
 do {
-    console.log("**********************WELCOME******************************\n");
-    console.log('1.Search for Doctor\n 2.Search for Patient \n3.Take Appointment\n4.Exit');
-    var ch = readline.question('\nEnter your choice: '); // reading user input.
-    switch (ch) {
-        case 1:
-            var dr = readline.question('\nWhich person details you want to add?'); // reading user input.
-            var search = ad.addperson(); //calling function from class using class object.
-            if (search) {
-                console.log('\n' + search + ' is available');
-            }
-            else {
-                console.log(search + ' Doctor is not available');
-            }
-            break;
-        case 2:
-            var pt = readline.question('which patient you want to search?'); // reading user input.
-            var delrecord = ad["delete"](); //calling function from class using class object.
-            if (delrecord) {
-                console.log(delrecord + ' record deleted');
-            }
-            else {
-                console.log('not deleted');
-            }
-            break;
-        case 3:
-            var count = 0;
-            var ap = readline.question('Whose details you want?'); // reading user input.
-            var res = ad.ask(ap); //calling function from class using class object.
-            if (res == true) {
-                console.log('person details');
-                count++;
-            }
-            else {
-                console.log("Thank you!!");
-            }
-            if (count > 5) {
-                console.log('details' + ap);
-            }
-            break;
-        case 4:
-            var ap = readline.question('Whose details you want?'); // reading user input.
-            var res = ad.sort(); //calling function from class using class object.
-            // if (res == true) {
-            //     console.log('person details')
-            //     count++;
-            // }
-            // else {
-            //     console.log("Thank you!!")
-            // }
-            // if (count > 5) {
-            //     console.log('details' + ap)
-            // }
-            if (res == true) {
-                console.log("sorting ", res);
-            }
-            else {
-                console.log("not sorted", ap);
-            }
-            break;
-        case 5: process.exit();
+    console.log("1.add address\n2.update address.\n3.delete address\n4.sort\n5.exit");
+    choice = read.question('enter your choice:  ');
+    if (choice < '0' && choice > '6') {
+        console.log("invalid choice ");
+        throw Error;
     }
-} while (ch < 5);
+    switch (choice) {
+        case '1':
+            var res = add.addPerson();
+            if (res == true) {
+                console.log("data Added successfully");
+            }
+            else {
+                console.log("data is not added");
+            }
+            break;
+        case '2':
+            var idno = read.question("enter your id number:");
+            add.updateAddress(idno);
+            break;
+        case '3':
+            var res = add.deletee();
+            if (res == true) {
+                console.log("data deleted successfully");
+            }
+            else {
+                console.log("data is not deleted");
+            }
+            break;
+        case '4':
+            var res = add.sort();
+            if (res == true) {
+                console.log("data is sorted successfully");
+            }
+            else {
+                console.log("data is not sorted");
+            }
+            break;
+        case '5':
+            console.log("exit");
+            process.exit();
+            break;
+    }
+} while (choice < '6');
