@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 
-import { StockInventory } from '../StockInventory';
+import { StockInventory } from '../typescript/StockInventory';
 
 describe('StockInventory', () => {
     it("stock should be in string", () => {

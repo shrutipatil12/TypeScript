@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 
-import { Inventory } from '../Inventory';
+import { Inventory } from '../typescript/Inventory';
 
 describe('Inventory', () => {
     it("Customer choice should be in number", () => {

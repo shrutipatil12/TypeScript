@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 
-import { DeckOfCards } from '../DeckOfCards';
+import { DeckOfCards } from '../typescript/DeckOfCards';
 
 describe('DeckOfCards', () => {
     it("should return Array", () => {

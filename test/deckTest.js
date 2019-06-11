@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var chai_1 = require("chai");
-var DeckOfCards_1 = require("../DeckOfCards");
+var DeckOfCards_1 = require("../typescript/DeckOfCards");
 describe('DeckOfCards', function () {
     it("should return Array", function () {
         var result = new DeckOfCards_1.DeckOfCards();

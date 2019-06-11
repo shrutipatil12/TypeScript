@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { CliniqueReport } from "../clinique";
+import { CliniqueReport } from "../typescript/clinique";
 describe('CliniqueReport',()=>{
     it('file should not be empty',()=>{
         var result=new CliniqueReport("shruti", 1011, 1222333144, 56, "Dr. Malhotra");
